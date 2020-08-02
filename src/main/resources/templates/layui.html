@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>用户信息查询</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/layui/layui/css/layui.css"  media="all">
+
+</head>
+<body>
+<div class="layui-form-item">
+    <label class="layui-form-label">信息查询区</label>
+    <div class="layui-input-block">
+        <form class="layui-form" action=""  >
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cConsId"  placeholder="用户内部编号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户标识</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="custId"  placeholder="请输入客户编号 " autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">客户流水号</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用电查询号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="custQueryNo" placeholder="请输入用电编号" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">客户用电号</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">停电标志</label>
+                <div class="layui-input-block" id="poweroff_code">
+                    <input type="radio" name="poweroffCode" value="01" title="已停电" >
+                    <input type="radio" name="poweroffCode" value="02" title="未停电" checked>
+                </div>
+            </div>
+            <label class="layui-form-label">建档日期</label>
+            <div class="layui-inline"> <!-- 日期选择框 -->
+                <input type="text" class="layui-input" id="test1" name="buildDate">
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">检查周期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="chkCycle"  placeholder="请输入检查周期" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">月</div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn"  lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<table id="demo" lay-filter="test"></table>
+
+<script type="text/javascript" src="/static/layui/layui/layui.js"></script>
+
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1'//指定元素
+        });
+    });
+</script>
+
+
+
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            //自动表单请求
+            layui.use('table', function(){
+                var table = layui.table;
+                //第一个实例
+                table.render({
+                    elem: '#demo'
+                    ,height: 312
+                    ,url: 'http://localhost:9999/search' //数据接口
+                    ,where:data.field
+                    ,page: true //开启分页
+                    ,toolbar: true
+                    ,defaultToolbar: ['filter', 'print', 'exports']
+                    ,cols: [
+                        [
+                            {field: 'cConsId', title: '用户标识', width:80, sort: true, fixed: 'left'}
+                            ,{field: 'custId', title: '客户标识', width:80}
+                            ,{field: 'consNo', title: '用户编号', width:80, sort: true}
+                            ,{field: 'consName', title: '用户名称', width:80}
+                            ,{field: 'custQueryNo', title: '用电查询号', width: 177}
+                            ,{field: 'tmpPayRelaNo', title: '历史缴费关系号', width: 80, sort: true}
+                            ,{field: 'orgnConsNo', title: '原用户编号', width: 80, sort: true}
+                            ,{field: 'consSortCode', title: '用户分类', width: 80}
+                            ,{field: 'elecAddr', title: '用电地址', width: 135, sort: true}
+                            ,{field: 'tradeCode', title: '行业分类', width:80}
+                            ,{field: 'elecTypeCode', title: '用电类别', width:80, sort: true}
+                            ,{field: 'contractCap', title: '合同容量', width:80}
+                            ,{field: 'runCap', title: '运行容量', width: 177}
+                            ,{field: 'shiftNo', title: '生产班次', width: 80, sort: true}
+                            ,{field: 'lodeAttrCode', title: '负荷性质', width: 80, sort: true}
+                            ,{field: 'voltCode', title: '供电电压', width: 80}
+                            ,{field: 'hecIndustryCode', title: '高耗能产业类别', width: 135, sort: true}
+                            ,{field: 'holiday', title: '厂休日', width:80}
+                            ,{field: 'buildDate', title: '立户日期', width:80, sort: true}
+                            ,{field: 'psDate', title: '送电日期', width:80}
+                            ,{field: 'dueDate', title: '到期日期', width: 177}
+                            ,{field: 'notifyMode', title: '电费通知方式', width: 80, sort: true}
+                            ,{field: 'settleMode', title: '电费结算方式', width: 80, sort: true}
+                            ,{field: 'statusCode', title: '用户状态', width: 80}
+                            ,{field: 'orgNo', title: '供电单位编号', width: 135, sort: true}
+                            ,{field: 'rrioCode', title: '重要性等级', width:80}
+                            ,{field: 'chkCycle', title: '检查周期', width:80, sort: true}
+                            ,{field: 'lastChkDate', title: '上次检查日期', width:80}
+                            ,{field: 'checkerNo', title: '检察人员编号', width: 177}
+                            ,{field: 'poweroffCode', title: '停电标志', width: 80, sort: true}
+                            ,{field: 'transferCode', title: '转供标志', width: 80, sort: true}
+                        ]
+                    ]
+                });
+
+            });
+
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

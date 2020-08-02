@@ -1,0 +1,15 @@
+com\example\demo\service\FormatService.class
+com\example\demo\bo\CConsExample$GeneratedCriteria.class
+com\example\demo\bo\CCons.class
+com\example\demo\Untils\Log4jTest.class
+com\example\demo\bo\CConsExample$Criterion.class
+com\example\demo\DemoApplication.class
+com\example\demo\bo\CConsExample$Criteria.class
+com\example\demo\bo\CConsExample.class
+com\example\demo\mapper\CConsExtMapper.class
+com\example\demo\mapper\CConsMapper.class
+com\example\demo\vo\FormVo.class
+com\example\demo\service\CConsService.class
+com\example\demo\dto\TableDto.class
+com\example\demo\vo\FormByPageVo.class
+com\example\demo\controller\IndexController.class
