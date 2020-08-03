@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.bo.CCons;
+import com.example.demo.bo.CConsExtExample;
 import com.example.demo.vo.FormByPageVo;
 import com.example.demo.vo.FormVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,4 +13,6 @@ public interface CConsExtMapper {
     List<CCons> selectByFormVo(FormByPageVo formByPageVo);
 
     Integer countByFormVo(FormVo formVo);
+
+    List<CCons> selectByExample(CConsExtExample cConsExtExample);
 }

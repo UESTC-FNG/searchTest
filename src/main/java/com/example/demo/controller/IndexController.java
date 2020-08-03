@@ -46,10 +46,13 @@ public class IndexController {
         FormByPageVo formByPageVo = new FormByPageVo(formVo,Integer.parseInt(page),Integer.parseInt(limit));
 
         //调用查询服务，获得返回数据集
-        TableDto tableDto = cConsService.search(formByPageVo);
+        TableDto tableDto = cConsService.searchByExample(formByPageVo);
         //json格式转换
         return formatService.jsonFormat(tableDto);
     }
+
+
+
 
 
 }
